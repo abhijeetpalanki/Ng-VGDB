@@ -1,0 +1,21 @@
+<nav class="navbar bg-dark fixed-top">
+  <div class="container">
+    <p>
+      <a
+        href="#"
+        class="navbar-brand fw-bold link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+        routerLink="/"
+        >Ng VGDB</a
+      >
+    </p>
+    <form class="d-flex" #form="ngForm" (ngSubmit)="onSubmit(form)">
+      <input
+        class="form-control me-2"
+        name="search"
+        placeholder="Search 500,000+ games"
+        ngModel
+      />
+      <button class="btn btn-outline-success">Search</button>
+    </form>
+  </div>
+</nav>

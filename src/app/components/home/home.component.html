@@ -1,0 +1,43 @@
+<div class="input-group w-25 filters" data-bs-theme="dark">
+  <label class="input-group-text" for="inputGroupSelect01">Sort</label>
+  <select
+    class="form-select"
+    id="inputGroupSelect01"
+    [(ngModel)]="sort"
+    (change)="searchGames(sort)"
+  >
+    <option value="name" selected>Name</option>
+    <option value="-released">Released</option>
+    <option value="-added">Added</option>
+    <option value="-created">Created</option>
+    <option value="-updated">Updated</option>
+    <option value="-rating">Rating</option>
+    <option value="metacritic">Metacritic</option>
+  </select>
+</div>
+
+<div class="games" data-bs-theme="dark">
+  <ng-container *ngFor="let game of games">
+    <div class="card game" (click)="openGameDetails(game.id)">
+      <div class="game-thumb-container">
+        <img
+          *ngIf="game.background_image"
+          src="{{ game.background_image }}"
+          alt="card-img-top"
+        />
+        <p *ngIf="!game.background_image">No Image</p>
+      </div>
+      <div class="card-body">
+        <p class="card-title">{{ game.name }}</p>
+      </div>
+      <div class="card-footer">
+        <img
+          *ngFor="let gamePlatform of game.parent_platforms"
+          src="assets/images/platforms/{{ gamePlatform.platform.slug }}.svg"
+          alt="{{ gamePlatform.platform.slug }}"
+          style="width: 20px; margin-right: 10px"
+        />
+      </div>
+    </div>
+  </ng-container>
+</div>
