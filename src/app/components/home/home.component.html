@@ -16,28 +16,31 @@
   </select>
 </div>
 
-<div class="games" data-bs-theme="dark">
-  <ng-container *ngFor="let game of games">
-    <div class="card game" (click)="openGameDetails(game.id)">
-      <div class="game-thumb-container">
-        <img
-          *ngIf="game.background_image"
-          src="{{ game.background_image }}"
-          alt="card-img-top"
-        />
-        <p *ngIf="!game.background_image">No Image</p>
+<div class="container" data-bs-theme="dark">
+  <div class="row">
+    <ng-container *ngFor="let game of games">
+      <div class="card game" (click)="openGameDetails(game.id)">
+        <div class="game-thumb-container">
+          <img
+            *ngIf="game.background_image"
+            src="{{ game.background_image }}"
+            alt="background_image"
+            class="card-img-top"
+          />
+          <p *ngIf="!game.background_image">No Image</p>
+        </div>
+        <div class="card-body">
+          <p class="card-title">{{ game.name }}</p>
+        </div>
+        <div class="card-footer">
+          <img
+            *ngFor="let gamePlatform of game.parent_platforms"
+            src="assets/images/platforms/{{ gamePlatform.platform.slug }}.svg"
+            alt="{{ gamePlatform.platform.slug }}"
+            style="width: 20px; margin-right: 10px"
+          />
+        </div>
       </div>
-      <div class="card-body">
-        <p class="card-title">{{ game.name }}</p>
-      </div>
-      <div class="card-footer">
-        <img
-          *ngFor="let gamePlatform of game.parent_platforms"
-          src="assets/images/platforms/{{ gamePlatform.platform.slug }}.svg"
-          alt="{{ gamePlatform.platform.slug }}"
-          style="width: 20px; margin-right: 10px"
-        />
-      </div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
 </div>

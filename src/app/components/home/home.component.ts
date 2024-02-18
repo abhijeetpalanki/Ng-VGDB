@@ -58,6 +58,7 @@ import { Subscription } from 'rxjs';
       right: 0;
       margin: 0 auto;
       height: 172px;
+      object-fit: cover;
     }
   `,
 })
@@ -88,7 +89,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       .getGameList(sort, search)
       .subscribe((gameList: APIResponse<Game>) => {
         this.games = gameList.results;
-        console.log(gameList.results);
       });
   }
 

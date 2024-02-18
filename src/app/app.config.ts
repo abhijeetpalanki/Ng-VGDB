@@ -1,17 +1,18 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { GaugeModule } from 'angular-gauge';
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { HttpHeadersInterceptor } from './interceptors/http-headers.interceptor';
 import { HttpErrorsInterceptor } from './interceptors/http-errors.interceptor';
+import { GaugeModule } from 'angular-gauge';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
-    GaugeModule,
+    importProvidersFrom(GaugeModule.forRoot(), TabsModule.forRoot()),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpHeadersInterceptor,

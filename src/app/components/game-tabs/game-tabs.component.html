@@ -1,0 +1,55 @@
+<div class="game-tabs">
+  <tabset type="pills" [justified]="true">
+    <tab heading="About">
+      <p class="game-tabs-par" *ngIf="game.parent_platforms?.length">
+        Platforms:
+        <span *ngFor="let game of game.parent_platforms; let last = last">
+          {{ game.platform.name }}<span *ngIf="!last">, </span>
+        </span>
+      </p>
+      <p class="game-tabs-par" *ngIf="game.publishers?.length">
+        Publishers:
+        <span *ngFor="let publisher of game.publishers; let last = last">
+          {{ publisher.name }}<span *ngIf="!last">, </span>
+        </span>
+      </p>
+      <p class="game-tabs-par" *ngIf="game.website">
+        Website:
+        <a class="game-tabs-link" href="{{ game.website }}" target="_blank">{{
+          game.website
+        }}</a>
+      </p>
+      <div class="game-description" [innerHTML]="game.description"></div>
+      <p class="game-tab-votes">
+        <ng-container *ngFor="let rating of game.ratings">
+          <span *ngIf="rating.title === 'exceptional'">
+            <i class="fa-solid fa-thumbs-up" style="color: #5ee432"></i>
+            <span class="game-votes-count">{{ rating.count || 0 }}</span>
+          </span>
+          <span *ngIf="rating.title === 'skip'">
+            <i class="fa-solid fa-thumbs-down" style="color: #ef4655"></i>
+            <span class="game-votes-count">{{ rating.count || 0 }}</span>
+          </span>
+        </ng-container>
+      </p>
+    </tab>
+    <tab heading="Screenshots" *ngIf="game.screenshots?.length">
+      <img
+        src="{{ screenshot.image }}"
+        alt="screenshot"
+        class="game-screenshot"
+        *ngFor="let screenshot of game.screenshots"
+      />
+    </tab>
+    <tab heading="Trailers" *ngIf="game.trailers?.length">
+      <video class="game-trailer" controls>
+        <source
+          src="{{ trailer.data.max }}"
+          type="video/mp4"
+          *ngFor="let trailer of game.trailers"
+        />
+        Your browser does not support the video tag.
+      </video></tab
+    >
+  </tabset>
+</div>
